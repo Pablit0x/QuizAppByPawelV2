@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/custom_nav"
+    app:startDestination="@id/modeSelectionFragment">
+
+    <fragment
+        android:id="@+id/modeSelectionFragment"
+        android:name="com.example.quizappbypawel.fragments.mode.ModeSelectionFragment"
+        android:label="Select Mode"
+        tools:layout="@layout/fragment_mode_selection">
+        <action
+            android:id="@+id/action_modeSelectionFragment_to_teacherListFragment"
+            app:destination="@id/teacherListFragment" />
+        <action
+            android:id="@+id/action_modeSelectionFragment_to_studentListFragment"
+            app:destination="@id/studentListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherListFragment"
+        android:name="com.example.quizappbypawel.fragments.list.teacher.quiz.TeacherQuizListFragment"
+        android:label="Quizzes"
+        tools:layout="@layout/fragment_teacher_list">
+        <action
+            android:id="@+id/action_teacherListFragment_to_modeSelectionFragment"
+            app:destination="@id/modeSelectionFragment" />
+        <action
+            android:id="@+id/action_teacherListFragment_to_teacherQuestionListFragment"
+            app:destination="@id/teacherQuestionListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentListFragment"
+        android:name="com.example.quizappbypawel.fragments.list.student.StudentListFragment"
+        android:label="Quizzes"
+        tools:layout="@layout/fragment_student_list">
+        <action
+            android:id="@+id/action_studentListFragment_to_modeSelectionFragment"
+            app:destination="@id/modeSelectionFragment" />
+        <action
+            android:id="@+id/action_studentListFragment_to_studentQuizFragment"
+            app:destination="@id/studentQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherQuestionListFragment"
+        android:name="com.example.quizappbypawel.fragments.list.teacher.question.TeacherQuestionListFragment"
+        android:label="Questions"
+        tools:layout="@layout/fragment_teacher_question_list">
+        <action
+            android:id="@+id/action_teacherQuestionListFragment_to_teacherAnswerListFragment"
+            app:destination="@id/teacherAnswerListFragment" />
+        <argument
+            android:name="selectedQuiz"
+            app:argType="com.example.quizappbypawel.model.Quiz" />
+        <action
+            android:id="@+id/action_teacherQuestionListFragment_to_modeSelectionFragment"
+            app:destination="@id/modeSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherAnswerListFragment"
+        android:name="com.example.quizappbypawel.fragments.list.teacher.answer.TeacherAnswerListFragment"
+        android:label="Answers"
+        tools:layout="@layout/fragment_teacher_answer_list">
+        <argument
+            android:name="selectedQuestion"
+            app:argType="com.example.quizappbypawel.model.Question" />
+        <argument
+            android:name="selectedQuiz"
+            app:argType="com.example.quizappbypawel.model.Quiz" />
+        <action
+            android:id="@+id/action_teacherAnswerListFragment_to_modeSelectionFragment"
+            app:destination="@id/modeSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentQuizFragment"
+        android:name="com.example.quizappbypawel.fragments.list.student.quiz.StudentQuizFragment"
+        android:label=""
+        tools:layout="@layout/fragment_student_quiz" >
+        <argument
+            android:name="selectedQuiz"
+            app:argType="com.example.quizappbypawel.model.Quiz" />
+        <action
+            android:id="@+id/action_studentQuizFragment_to_quizEndFragment"
+            app:destination="@id/quizEndFragment"
+            app:popUpTo="@+id/custom_nav"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/quizEndFragment"
+        android:name="com.example.quizappbypawel.fragments.end.QuizEndFragment"
+        android:label="Quiz Finished"
+        tools:layout="@layout/fragment_quiz_end" >
+        <action
+            android:id="@+id/action_quizEndFragment_to_studentListFragment"
+            app:destination="@id/studentListFragment"
+            app:popUpTo="@+id/custom_nav"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="score"
+            app:argType="integer" />
+        <argument
+            android:name="numOfQuestions"
+            app:argType="integer" />
+    </fragment>
+</navigation>
